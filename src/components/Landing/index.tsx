@@ -15,18 +15,15 @@ const Landing = () => {
         <title></title>
         <meta name="Twitter API Test" content="Twitter API Test" />
       </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>
           <a>Twitter</a> API Test
         </h1>
         <p className={styles.description}>
-          Twitter API Test
           <code className={styles.code}>
-            <a>Twitter API</a>
+            <a>Twitter API Test</a>
           </code>
         </p>
-
         <div className={styles.grid}>
           <a href={authUrl} className={styles.card}>
             <h2>Login</h2>
