@@ -9,7 +9,10 @@ const Tweets = () => {
   // 넷플릭스 좋아요,리트윗 할 게시물 주소
   const postURL = "https://twitter.com/NetflixKR/status/1586281688572665856";
 
+  // 대상 트위터 이름
   const targetName = replaceTarget(netflixURL);
+
+  // 대상 트위터 게시물 아이디
   const targetPostID = replaceTarget(postURL);
 
   return (
