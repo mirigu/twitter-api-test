@@ -1,9 +1,17 @@
 import React from "react";
 import styles from "../../../styles/Home.module.css";
+import { replaceTarget } from "../../utils/replaceTarget";
 
 const Tweets = () => {
+  // 넷플릭스 트위터 주소
   const netflixURL = "https://twitter.com/NetflixKR";
+
+  // 넷플릭스 좋아요,리트윗 할 게시물 주소
   const postURL = "https://twitter.com/NetflixKR/status/1586281688572665856";
+
+  const targetName = replaceTarget(netflixURL);
+  const targetPostID = replaceTarget(postURL);
+
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>
