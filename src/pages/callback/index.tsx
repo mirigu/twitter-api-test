@@ -18,6 +18,7 @@ const Callback = () => {
 
   React.useEffect(() => {
     if (code !== undefined) {
+      // 주소 쿼리에 코드가 있으면
       saveToken();
     }
     return;
@@ -25,8 +26,10 @@ const Callback = () => {
 
   React.useEffect(() => {
     if (getCookie("token") !== undefined) {
+      // 쿠키에 토큰이 있으면
       router.push("/tweets");
     }
+    return;
   }, [router]);
 
   return <React.Fragment></React.Fragment>;
