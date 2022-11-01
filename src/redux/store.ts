@@ -1,13 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import twitterSlice, { ITwitterState } from "./modules/twitter/slice";
 
-export interface IReduxState {}
+export interface IReduxState {
+  twitter: ITwitterState;
+}
 
 export type AsyncThunkConfig = {
   state: IReduxState;
   rejectValue?: string;
 };
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  [twitterSlice.name]: twitterSlice.reducer,
+});
 
 export const store = configureStore({
   reducer: rootReducer,
