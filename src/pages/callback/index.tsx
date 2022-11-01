@@ -14,7 +14,7 @@ const Callback = () => {
     const response = await instance.post("/token", { code });
     setCookie("token", response.data.token.access_token);
     setCookie("refresh_token", response.data.token.refresh_token);
-    await router.push("/tweets")
+    await router.push("/tweets");
   }, [code, router]);
 
   React.useEffect(() => {
