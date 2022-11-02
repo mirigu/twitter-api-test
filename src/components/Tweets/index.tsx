@@ -1,7 +1,11 @@
 import React from "react";
 // redux
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
-import { getUserInfo } from "../../redux/modules/twitter/action";
+import {
+  followMe,
+  getTargetInfo,
+  getUserInfo,
+} from "../../redux/modules/twitter/action";
 // cookie
 import { getCookie } from "../../utils/cookie";
 // func
@@ -20,15 +24,22 @@ const Tweets = () => {
   // 대상 트위터 게시물 아이디
   const targetPostID = replaceTarget(postURL);
 
-  const { user } = useAppSelector((state) => state.twitter);
+  const { user, target } = useAppSelector((state) => state.twitter);
+  const { following } = useAppSelector((state) => state.twitter);
+
+  const followOnClick = () => {
+    const data = { userId: user?.id, targetId: target?.id };
+    dispatch(followMe(data));
+  };
 
   React.useEffect(() => {
+    dispatch(getTargetInfo(targetName));
     if (getCookie("token") !== undefined) {
       // 토큰 있으면 유저 정보 가져오기
       dispatch(getUserInfo());
     }
     return;
-  }, [dispatch]);
+  }, [dispatch, targetName]);
 
   return (
     <main className={styles.main}>
@@ -49,7 +60,7 @@ const Tweets = () => {
         </p>
       )}
       <div className={styles.grid}>
-        <button className={styles.card} name="isFollow">
+        <button className={styles.card} name="isFollow" onClick={followOnClick}>
           <h2>팔로우</h2>
         </button>
         <button className={styles.card} name="isLike">

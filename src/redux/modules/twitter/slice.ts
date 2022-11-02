@@ -1,5 +1,5 @@
 import { createSlice, AnyAction } from "@reduxjs/toolkit";
-import { getToken, getUserInfo } from "./action";
+import { followMe, getTargetInfo, getToken, getUserInfo } from "./action";
 // types
 import type { IUserData } from "../../../lib/types/user";
 
@@ -9,6 +9,8 @@ export interface ITwitterState {
   error: boolean;
   errorMsg: string;
   user: IUserData | undefined;
+  target: IUserData | undefined;
+  following: boolean;
 }
 
 const initialState = {
@@ -17,6 +19,8 @@ const initialState = {
   error: false,
   errorMsg: "",
   user: undefined,
+  target: undefined,
+  following: false,
 } as ITwitterState;
 
 function isRejectAction(action: AnyAction) {
@@ -51,6 +55,28 @@ export const twitterSlice = createSlice({
         state.success = true;
         state.error = false;
         state.user = action.payload.user;
+      })
+      .addCase(getTargetInfo.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = false;
+      })
+      .addCase(getTargetInfo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.error = false;
+        state.target = action.payload.target;
+      })
+      .addCase(followMe.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = false;
+      })
+      .addCase(followMe.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.following = true;
+        state.error = false;
       })
       .addMatcher(isRejectAction, (state, action) => {
         state.loading = false;

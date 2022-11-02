@@ -32,3 +32,34 @@ export const getUserInfo = createAsyncThunk(
     }
   }
 );
+
+// 트위터 팔로우 대상 정보 가져오기
+export const getTargetInfo = createAsyncThunk(
+  "twitter/getTargetInfo",
+  async (userName: string, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response = await instance.post("/target/info", { userName });
+      console.log(response);
+      return { target: response.data.targetUser };
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("데이터를 받아오는데 실패했습니다.");
+    }
+  }
+);
+
+// 팔로우 하기
+export const followMe = createAsyncThunk(
+  "twitter/followMe",
+  async (data: object, { dispatch, getState, rejectWithValue }) => {
+    try {
+      console.log(data);
+      const response = await instance.post("/tweets/follow", data);
+      console.log(response);
+      // return { target: response.data.targetUser };
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("데이터를 받아오는데 실패했습니다.");
+    }
+  }
+);
