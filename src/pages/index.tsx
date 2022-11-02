@@ -38,7 +38,7 @@ export function getStaticProps() {
   app.use(cors());
 
   // 코드 값 받고 토큰 넘겨주기
-  app.post("/callback", async function (req: any, res: any) {
+  app.post("/token", async function (req: any, res: any) {
     try {
       const { code } = req.body;
       const token = await authClient.requestAccessToken(code as string);
