@@ -49,7 +49,7 @@ export function getStaticProps() {
   });
 
   // 사용자 정보 가져오기
-  app.get("/user/info", async function (req, res) {
+  app.get("/user/info", async function (req: any, res: any) {
     try {
       const response = await client.users.findMyUser();
       res.send({ user: response.data });
@@ -59,7 +59,7 @@ export function getStaticProps() {
   });
 
   // 트위터 팔로우, 좋아요, 리트윗 대상 정보 가져오기
-  app.post("/target/info", async function (req, res) {
+  app.post("/target/info", async function (req: any, res: any) {
     try {
       const { userName } = req.body;
       const response = await client.users.findUserByUsername(userName);
@@ -69,18 +69,16 @@ export function getStaticProps() {
     }
   });
 
-  // 트위터 팔로우
-  app.post("/tweets/follow", async function (req, res) {
-    try {
-      const { userId, targetId } = req.body;
-      const follow = await client.users.usersIdFollow(userId, {
-        target_user_id: targetId,
-      });
-      res.send({ follow: follow });
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  // 트위터 언팔로우 하기
+  // app.post("/tweets/unFollow", async function (req: any, res: any) {
+  //   try {
+  //     const { id, listId } = req.body;
+  //     const following = await client.lists.listUserUnfollow(id, listId);
+  //     res.send({ following });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
 
   // 트위터 게시글 좋아요
   app.post("/tweets/like", async function (req, res) {
