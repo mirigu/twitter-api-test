@@ -1,13 +1,9 @@
 import React from "react";
 // redux
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
-import {
-  followMe,
-  getTargetInfo,
-  getUserInfo,
-  postLike,
-  postRetweet,
-} from "../../redux/modules/twitter/action";
+import { getTargetInfo, getUserInfo } from "../../redux/modules/twitter/action";
+import { followMe } from "../../redux/modules/twitter/action";
+import { postLike, postRetweet } from "../../redux/modules/twitter/action";
 // cookie
 import { getCookie } from "../../utils/cookie";
 // func

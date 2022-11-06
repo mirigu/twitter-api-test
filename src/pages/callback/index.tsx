@@ -9,6 +9,7 @@ const Callback = () => {
   const dispatch = useAppDispatch();
 
   const router = useRouter();
+  // 인가코드
   const code = router.query.code;
 
   const { success, error, errorMsg } = useAppSelector((state) => state.twitter);

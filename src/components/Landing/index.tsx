@@ -1,7 +1,9 @@
-import Head from "next/head";
 import React from "react";
-import styles from "../../../styles/Home.module.css";
+import Head from "next/head";
+// twitter
 import { authClient, STATE } from "../../pages";
+// css
+import styles from "../../../styles/Home.module.css";
 
 const Landing = () => {
   const authUrl = authClient.generateAuthURL({
@@ -12,7 +14,7 @@ const Landing = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title></title>
+        <title>Twitter API Test</title>
         <meta name="Twitter API Test" content="Twitter API Test" />
       </Head>
       <main className={styles.main}>
