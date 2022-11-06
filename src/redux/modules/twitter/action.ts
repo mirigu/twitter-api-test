@@ -39,7 +39,6 @@ export const getTargetInfo = createAsyncThunk(
   async (userName: string, { dispatch, getState, rejectWithValue }) => {
     try {
       const response = await instance.post("/target/info", { userName });
-      console.log(response);
       return { target: response.data.targetUser };
     } catch (error) {
       console.log(error);
@@ -53,9 +52,7 @@ export const followMe = createAsyncThunk(
   "twitter/followMe",
   async (data: object, { dispatch, getState, rejectWithValue }) => {
     try {
-      console.log(data);
       const response = await instance.post("/tweets/follow", data);
-      console.log(response);
       return { following: response.data.follow.data.following };
     } catch (error) {
       console.log(error);
@@ -70,7 +67,6 @@ export const postLike = createAsyncThunk(
   async (data: object, { dispatch, getState, rejectWithValue }) => {
     try {
       const response = await instance.post("/tweets/like", data);
-      console.log(response);
       return { liked: response.data.like.data.liked };
     } catch (error) {
       console.log(error);
@@ -85,7 +81,6 @@ export const postRetweet = createAsyncThunk(
   async (data: object, { dispatch, getState, rejectWithValue }) => {
     try {
       const response = await instance.post("/tweets/retweet", data);
-      console.log(response);
       return { retweeted: response.data.retweet.data.retweeted };
     } catch (error) {
       console.log(error);
