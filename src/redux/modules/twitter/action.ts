@@ -78,3 +78,18 @@ export const postLike = createAsyncThunk(
     }
   }
 );
+
+// 게시물 리트윗
+export const postRetweet = createAsyncThunk(
+  "twitter/postRetweet",
+  async (data: object, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response = await instance.post("/tweets/retweet", data);
+      console.log(response);
+      return { retweeted: response.data.retweet.data.retweeted };
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("해당 게시물을 좋아요 하는데 실패했습니다.");
+    }
+  }
+);

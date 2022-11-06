@@ -6,6 +6,7 @@ import {
   getTargetInfo,
   getUserInfo,
   postLike,
+  postRetweet,
 } from "../../redux/modules/twitter/action";
 // cookie
 import { getCookie } from "../../utils/cookie";
@@ -27,7 +28,9 @@ const Tweets = () => {
 
   const { user, target } = useAppSelector((state) => state.twitter);
 
-  const { following, liked } = useAppSelector((state) => state.twitter);
+  const { following, liked, retweeted } = useAppSelector(
+    (state) => state.twitter
+  );
 
   // 팔로우 버튼 클릭시 실행되는 함수
   const followOnClick = () => {
@@ -39,6 +42,12 @@ const Tweets = () => {
   const likedOnClick = () => {
     const data = { userId: user?.id, tweetId: targetPostID };
     dispatch(postLike(data));
+  };
+
+  // 리트윗 버튼 클릭시 실행되는 함수
+  const RetweetOnClick = () => {
+    const data = { userId: user?.id, tweetId: targetPostID };
+    dispatch(postRetweet(data));
   };
 
   React.useEffect(() => {
@@ -75,8 +84,12 @@ const Tweets = () => {
         <button className={styles.card} name="isLike" onClick={likedOnClick}>
           <h2>{liked ? "좋아요 취소" : "좋아요"}</h2>
         </button>
-        <button className={styles.card} name="isRetweet">
-          <h2>리트윗</h2>
+        <button
+          className={styles.card}
+          name="isRetweet"
+          onClick={RetweetOnClick}
+        >
+          <h2>{retweeted ? "리트윗 취소" : "리트윗"}</h2>
         </button>
       </div>
       <div className={styles.grid}>

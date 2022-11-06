@@ -5,6 +5,7 @@ import {
   getToken,
   getUserInfo,
   postLike,
+  postRetweet,
 } from "./action";
 // types
 import type { IUserData } from "../../../lib/types/user";
@@ -18,6 +19,7 @@ export interface ITwitterState {
   target: IUserData | undefined;
   following: boolean;
   liked: boolean;
+  retweeted: boolean;
 }
 
 const initialState = {
@@ -29,6 +31,7 @@ const initialState = {
   target: undefined,
   following: false,
   liked: false,
+  retweeted: false,
 } as ITwitterState;
 
 function isRejectAction(action: AnyAction) {
@@ -95,6 +98,17 @@ export const twitterSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.liked = action.payload.liked;
+        state.error = false;
+      })
+      .addCase(postRetweet.pending, (state) => {
+        state.loading = true;
+        state.success = false;
+        state.error = false;
+      })
+      .addCase(postRetweet.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.retweeted = action.payload.retweeted;
         state.error = false;
       })
       .addMatcher(isRejectAction, (state, action) => {
