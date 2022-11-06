@@ -9,6 +9,7 @@ import {
 } from "./action";
 // types
 import type { IUserData } from "../../../lib/types/user";
+import { removeCookie } from "../../../utils/cookie";
 
 export interface ITwitterState {
   loading: boolean;
@@ -43,6 +44,11 @@ export const twitterSlice = createSlice({
   initialState,
   reducers: {
     statusReset: (state) => initialState,
+    loginReset: (state) => {
+      removeCookie("token");
+      removeCookie("refresh_token");
+      initialState;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -120,6 +126,6 @@ export const twitterSlice = createSlice({
       .addDefaultCase((state) => state),
 });
 
-export const { statusReset } = twitterSlice.actions;
+export const { statusReset, loginReset } = twitterSlice.actions;
 
 export default twitterSlice;

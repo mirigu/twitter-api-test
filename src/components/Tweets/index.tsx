@@ -5,14 +5,17 @@ import { getTargetInfo, getUserInfo } from "../../redux/modules/twitter/action";
 import { followMe } from "../../redux/modules/twitter/action";
 import { postLike, postRetweet } from "../../redux/modules/twitter/action";
 // cookie
-import { getCookie } from "../../utils/cookie";
+import { getCookie, removeCookie } from "../../utils/cookie";
 // func
 import { replaceTarget } from "../../utils/replaceTarget";
 // css
 import styles from "../../../styles/Home.module.css";
+import { useRouter } from "next/router";
+import { loginReset } from "../../redux/modules/twitter/slice";
 
 const Tweets = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   // 넷플릭스 트위터 주소
   const netflixURL = "https://twitter.com/NetflixKR";
   // 넷플릭스 좋아요,리트윗 할 게시물 주소
@@ -44,6 +47,11 @@ const Tweets = () => {
   const RetweetOnClick = () => {
     const data = { userId: user?.id, tweetId: targetPostID };
     dispatch(postRetweet(data));
+  };
+
+  const logoutOnClick = () => {
+    dispatch(loginReset());
+    router.push("/");
   };
 
   React.useEffect(() => {
@@ -89,7 +97,7 @@ const Tweets = () => {
         </button>
       </div>
       <div className={styles.grid}>
-        <button className={styles.card}>
+        <button className={styles.card} onClick={logoutOnClick}>
           <h2>로그아웃</h2>
         </button>
       </div>
